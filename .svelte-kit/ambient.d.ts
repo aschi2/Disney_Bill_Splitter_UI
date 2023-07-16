@@ -75,7 +75,6 @@ declare module '$env/static/private' {
 	export const npm_command: string;
 	export const YSU_MESSAGE_POSITION: string;
 	export const PWD: string;
-	export const LAZYGIT_NEW_DIR_FILE: string;
 	export const FZF_ALT_C_COMMAND: string;
 	export const npm_lifecycle_event: string;
 	export const EDITOR: string;
@@ -197,7 +196,6 @@ declare module '$env/dynamic/private' {
 		npm_command: string;
 		YSU_MESSAGE_POSITION: string;
 		PWD: string;
-		LAZYGIT_NEW_DIR_FILE: string;
 		FZF_ALT_C_COMMAND: string;
 		npm_lifecycle_event: string;
 		EDITOR: string;
