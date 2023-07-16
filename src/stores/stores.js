@@ -21,11 +21,11 @@ export const Cart = writable([]);
 export const Subtotal = derived(Cart, ($Cart) => {
   let subtotal = 0.0;
   $Cart.forEach((item) => {
-    subtotal += item.price;
+    subtotal += item.discounted_price;
   });
   console.log(subtotal)
   return subtotal;
 });
-
+export const Discount = writable(15);
 export const Tax = writable(0.0);
 export const Tip = writable(0.0);

@@ -1,5 +1,14 @@
 <script>
-  export let item;
+import {Cart} from "../stores/stores"
+export let item;
+function removeItem() {
+	const index = $Cart.findIndex((i) => {
+			return i.id === item.id;
+		})
+	$Cart.splice(index, 1);
+	$Cart = $Cart
+
+}
 </script>
 
 <div class="grid grid-cols-1 divide-y shadow-md bg-white/10 card">
@@ -17,5 +26,11 @@
 
   <div class="text-center">
     {item.assigned_to}
+  </div>
+  <div class="text-center py-2">
+      <button type="button" class="btn btn-sm variant-filled-error" on:click={removeItem}>
+      Delete
+      </button>
+
   </div>
 </div>

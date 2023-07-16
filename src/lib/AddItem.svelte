@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Cart, Payers } from "../stores/stores";
+  import { Cart, Payers, Discount } from "../stores/stores";
   import { SlideToggle } from "@skeletonlabs/skeleton";
   import { toastStore } from "@skeletonlabs/skeleton";
   import type { ToastSettings } from "@skeletonlabs/skeleton";
@@ -23,6 +23,12 @@
     return /^\+?(0|[1-9]\d*)$/.test(str);
   }
 
+  function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
+
   function addItem() {
     if (isInt(price)) {
       price = price + ".00";
@@ -36,11 +42,18 @@
 	return
 	}
     let num_price = parseFloat(price);
+    let discounted_price = num_price
+    let id = uuidv4()
+    if (can_discount){
+		discounted_price = num_price - (num_price * ($Discount/100))
+	}
     $Cart.push({
       name: name,
       price: num_price,
       can_discount: can_discount,
       assigned_to: assigned_to,
+      id: id,
+      discounted_price: discounted_price
     });
     $Cart = $Cart;
     name = "";
@@ -50,7 +63,7 @@
 </script>
 
 <div class="grid grid-cols-1 items-center gap-4">
-  <div class="grid grid-cols-3 items-center text-center divide-x">
+  <div class="grid grid-cols-2 items-center text-center divide-x">
     <div>
       <input
         class="input variant-form-material"
@@ -68,12 +81,20 @@
         placeholder="Item Price"
       />
     </div>
+    <div class="flex flex-row items-center">
+      <input
+        class="input variant-form-material"
+        type="number"
+        bind:value={$Discount}
+      /> %
+    </div>
+    
     <div>
       <SlideToggle
         name="slider-label"
         size="sm"
         active="bg-success-500"
-        bind:checked={can_discount}>Discount</SlideToggle
+        bind:checked={can_discount}>Discountable</SlideToggle
       >
     </div>
   </div>

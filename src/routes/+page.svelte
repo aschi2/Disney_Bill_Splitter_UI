@@ -1,13 +1,14 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 <script>
-  import { Cart, Tax, Tip, Subtotal } from "../stores/stores";
+  import { Cart, Tax, Tip, Subtotal,Discount } from "../stores/stores";
   import Items from "../lib/items.svelte";
   import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
   import AddPayer from "../lib/AddPayer.svelte";
   import AddItem from "../lib/AddItem.svelte";
+  import Split from "../lib/Split.svelte";
   import { Toast } from "@skeletonlabs/skeleton";
   $: total = Number($Tax) + Number($Tip) + Number(subtotal);
-  $: subtotal = Number($Subtotal)
+  $: subtotal = Number($Subtotal);
 </script>
 
 <Toast />
@@ -50,33 +51,52 @@
       <svelte:fragment slot="summary">Summary</svelte:fragment>
       <svelte:fragment slot="content">
         <div class="grid grid-cols-1 place-items-center gap-4">
-	<div>
-	Subtotal: ${subtotal}
-	</div>
-	<div class = "flex flex-row items-center gap-x-4">
-	Tax:<input
-        class="input variant-form-material"
-        type="text"
-        inputmode="decimal"
-        bind:value={$Tax}
-        placeholder="Item Price"
-      />
+          <div class="grid grid-cols-1 items-center gap-x-4 text-center">
+          <div class="grid grid-cols-1 text-center">
+	  <div>
+            Subtotal
+	    </div>
+	    <div>
+	${subtotal.toFixed(2)}
+	    </div>
+          </div>
+          <div class="grid grid-cols-1 items-center gap-x-4 text-center">
+	  <div>
+            Tax
+	    </div>
+	    <input
+              class="input variant-form-material"
+              type="text"
+              inputmode="decimal"
+              bind:value={$Tax}
+              placeholder="Item Price"
+            />
+          </div>
+          <div class="grid grid-cols-1 items-center gap-x-4 text-center">
+	  <div>
+            Tip
+	    </div>
 
-        </div>
-	<div class = "flex flex-row items-center gap-x-4">
-	Tip:<input
-        class="input variant-form-material"
-        type="text"
-        inputmode="decimal"
-        bind:value={$Tip}
-        placeholder="Tip"
-      /> {$Subtotal > 0 ? ($Tip/$Subtotal*100).toFixed(2) : "0.00"}%
-
-        </div>
-	<div>
-	Total: ${total.toFixed(2)}
-	</div>
-      </svelte:fragment>
+	    <input
+              class="input variant-form-material"
+              type="text"
+              inputmode="decimal"
+              bind:value={$Tip}
+              placeholder="Tip"
+            />
+            {$Subtotal > 0 ? (($Tip / $Subtotal) * 100).toFixed(2) : "0.00"}%
+          </div>
+          <div>
+            Total: ${total.toFixed(2)}
+          </div>
+        </div></svelte:fragment
+      >
+    </AccordionItem>
+    <AccordionItem open>
+      <svelte:fragment slot="summary">Split</svelte:fragment>
+      <svelte:fragment slot="content">
+      <Split/>
+        </svelte:fragment >
     </AccordionItem>
   </Accordion>
 </div>
