@@ -53,7 +53,8 @@
       can_discount: can_discount,
       assigned_to: assigned_to,
       id: id,
-      discounted_price: discounted_price
+      discounted_price: discounted_price,
+      discount: $Discount,
     });
     $Cart = $Cart;
     name = "";
@@ -63,7 +64,7 @@
 </script>
 
 <div class="grid grid-cols-1 items-center gap-4">
-  <div class="grid grid-cols-2 items-center text-center divide-x">
+  <div class="grid grid-cols-2 items-center text-center gap-x-2 ">
     <div>
       <input
         class="input variant-form-material"
@@ -83,7 +84,7 @@
     </div>
     <div class="flex flex-row items-center">
       <input
-        class="input variant-form-material"
+        class="input variant-form-material text-right"
         type="number"
         bind:value={$Discount}
       /> %
@@ -106,7 +107,7 @@
     </select>
   </div>
   <div class="text-center">
-    <button type="button" class="btn btn-sm variant-filled" on:click={addItem}>
+    <button type="button" class="btn btn-sm variant-filled rounded" on:click={addItem}>
       Add Item
     </button>
   </div>

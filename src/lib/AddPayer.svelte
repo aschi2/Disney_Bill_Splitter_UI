@@ -22,23 +22,21 @@
 </script>
 
 <div class=" grid grid-cols-1 justify-items-center gap-4 divide-y shadow-md">
-  <div class="flex w-full flex-row items-center justify-items-center">
-    <div class="w-full">
+  <div class="flex w-full flex-row items-center justify-items-center input-group input-group-divider rounded">
       <input
         class="input variant-form-material"
         type="text"
         bind:value={payer}
       />
-    </div>
-    <div>
       <button
         type="button"
-        class="btn btn-sm variant-filled"
+        class="variant-filled h-full whitespace-nowrap"
         on:click={addPayer}
       >
+      <div class="flex flex-row">
         Add Payer
+	</div>
       </button>
-    </div>
   </div>
   <div class="grid auto-cols-auto grid-flow-col gap-x-4">
     {#each $Payers as payer}

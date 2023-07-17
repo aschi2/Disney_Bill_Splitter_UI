@@ -24,7 +24,7 @@
   {#each $Payers as payer}
     <div class="grid grid-cols-1 p-2">
       <span class="text-sm">{payer}</span>
-      <div>{payerBill(payer,$Cart,$Tip,$Tax).toFixed(2)}</div>
+      <div>${payerBill(payer,$Cart,$Tip,$Tax).toFixed(2)}</div>
     </div>
   {/each}
 </div>
