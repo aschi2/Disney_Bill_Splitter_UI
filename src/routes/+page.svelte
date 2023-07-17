@@ -1,6 +1,8 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 <head>
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <script>
   import { Cart, Tax, Tip, Subtotal, Subtotal_Full } from "../stores/stores";
