@@ -1,4 +1,5 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
+<meta name="mobile-web-app-capable" content="yes">
 <script>
   import { Cart, Tax, Tip, Subtotal, Subtotal_Full } from "../stores/stores";
   import Items from "../lib/Items.svelte";
