@@ -1,12 +1,5 @@
-<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
-<svelte:head>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Themepark Split">
-</svelte:head>
-
 <script>
-  import { Cart, Tax, Tip, Subtotal, Subtotal_Full } from "../stores/stores";
+  import { Cart, Tax, Tip, Subtotal, Subtotal_Full, Payers } from "../stores/stores";
   import Items from "../lib/Items.svelte";
   import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
   import AddPayer from "../lib/AddPayer.svelte";
@@ -15,12 +8,28 @@
   import { Toast } from "@skeletonlabs/skeleton";
   $: total = Number($Tax) + Number($Tip) + Number(subtotal);
   $: subtotal = Number($Subtotal);
+  function reset() {
+    $Cart = [];
+    $Tax = 0;
+    $Tip = 0;
+    $Payers = []
+  }
 </script>
 
+<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
+<svelte:head>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  />
+  <meta name="apple-mobile-web-app-title" content="Themepark Split" />
+</svelte:head>
+
 <Toast />
-<div class="place-items-center gap-8 divide-y">
+<div class="place-items-center gap-8">
   <div class="w-full">
-    <h1 class="h1 text-center backdrop-brightness-125 shadow-lg py-2">
+    <h1 class="h1 py-2 text-center shadow-lg backdrop-brightness-125">
       <span
         class="bg-gradient-to-br from-blue-500 to-cyan-300 box-decoration-clone bg-clip-text text-transparent"
         >Themepark Bill Splitter</span
@@ -91,7 +100,9 @@
                 bind:value={$Tip}
                 placeholder="Tip"
               />
-              {$Subtotal > 0 ? (($Tip / $Subtotal_Full) * 100).toFixed(2) : "0.00"}%
+              {$Subtotal > 0
+                ? (($Tip / $Subtotal_Full) * 100).toFixed(2)
+                : "0.00"}%
             </div>
             <div>
               Total: ${total.toFixed(2)}
@@ -107,4 +118,9 @@
       </svelte:fragment>
     </AccordionItem>
   </Accordion>
+  <div class = "text-center">
+    <button type="button" class="btn variant-filled-error rounded" on:click={reset}>
+      Reset
+    </button>
+  </div>
 </div>

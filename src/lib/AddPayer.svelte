@@ -21,7 +21,7 @@
   }
 </script>
 
-<div class=" grid grid-cols-1 justify-items-center gap-4 divide-y shadow-md">
+<div class=" grid grid-cols-1 justify-items-center gap-4 divide-y">
   <div class="flex w-full flex-row items-center justify-items-center input-group input-group-divider rounded">
       <input
         class="input variant-form-material"
