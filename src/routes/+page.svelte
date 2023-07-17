@@ -1,9 +1,10 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
-<head>
+<svelte:head>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-</head>
+</svelte:head>
+
 <script>
   import { Cart, Tax, Tip, Subtotal, Subtotal_Full } from "../stores/stores";
   import Items from "../lib/Items.svelte";
