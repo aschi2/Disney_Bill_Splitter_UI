@@ -1,7 +1,7 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 <script>
   import { Cart, Tax, Tip, Subtotal, Subtotal_Full } from "../stores/stores";
-  import Items from "../lib/items.svelte";
+  import Items from "../lib/Items.svelte";
   import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
   import AddPayer from "../lib/AddPayer.svelte";
   import AddItem from "../lib/AddItem.svelte";

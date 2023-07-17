@@ -100,7 +100,8 @@
     </div>
   </div>
   <div>
-    <select class="select" multiple bind:value={assigned_to}>
+	<label>Select Payers</label>
+    <select class="select" name="payers" multiple bind:value={assigned_to}>
       {#each $Payers as payer}
         <option value={payer}>{payer}</option>
       {/each}
