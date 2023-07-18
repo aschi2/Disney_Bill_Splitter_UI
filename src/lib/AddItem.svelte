@@ -66,7 +66,6 @@
     $Cart = $Cart;
     name = "";
     price = "";
-    can_discount = true;
   }
 </script>
 
