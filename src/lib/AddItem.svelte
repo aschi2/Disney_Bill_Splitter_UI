@@ -24,10 +24,16 @@
   }
 
   function uuidv4() {
-  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-  );
-}
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+      (
+        c ^
+        (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+      ).toString(16)
+    );
+  }
+  function floorDecimals(value, decimals) {
+    return Number(Math.floor(value + "e" + decimals) + "e-" + decimals);
+  }
 
   function addItem() {
     if (isInt(price)) {
@@ -35,18 +41,19 @@
     }
     if (!isValidNumber(price)) {
       toastStore.trigger(priceError);
-      return
+      return;
     }
-    if (assigned_to.length == 0){
-	toastStore.trigger(assigned_toError)
-	return
-	}
+    if (assigned_to.length == 0) {
+      toastStore.trigger(assigned_toError);
+      return;
+    }
     let num_price = parseFloat(price);
-    let discounted_price = num_price
-    let id = uuidv4()
-    if (can_discount){
-		discounted_price = num_price - (num_price * ($Discount/100))
-	}
+    let discounted_price = num_price;
+    let id = uuidv4();
+    if (can_discount) {
+      discounted_price = num_price - num_price * ($Discount / 100);
+      discounted_price = floorDecimals(discounted_price, 2)
+    }
     $Cart.push({
       name: name,
       price: num_price,
@@ -64,7 +71,7 @@
 </script>
 
 <div class="grid grid-cols-1 items-center gap-4">
-  <div class="grid grid-cols-2 items-center text-center gap-x-2 ">
+  <div class="grid grid-cols-2 items-center gap-x-2 text-center">
     <div>
       <input
         class="input variant-form-material"
@@ -89,7 +96,7 @@
         bind:value={$Discount}
       /> %
     </div>
-    
+
     <div>
       <SlideToggle
         name="slider-label"
@@ -100,7 +107,7 @@
     </div>
   </div>
   <div>
-	<label>Select Payers</label>
+    <label>Select Payers</label>
     <select class="select" name="payers" multiple bind:value={assigned_to}>
       {#each $Payers as payer}
         <option value={payer}>{payer}</option>
@@ -108,7 +115,11 @@
     </select>
   </div>
   <div class="text-center">
-    <button type="button" class="btn btn-sm variant-filled rounded" on:click={addItem}>
+    <button
+      type="button"
+      class="btn btn-sm variant-filled rounded"
+      on:click={addItem}
+    >
       Add Item
     </button>
   </div>
