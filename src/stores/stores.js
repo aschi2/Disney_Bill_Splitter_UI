@@ -37,3 +37,7 @@ export const Subtotal_Full = derived(Cart, ($Cart) => {
 export const Discount = writable(15);
 export const Tax = writable(0.0);
 export const Tip = writable(0.0);
+export const Add_Name = writable("");
+export const Add_Price = writable("");
+export const Add_Assigned_To = writable([]);
+export const Add_Can_Discount = writable(true);

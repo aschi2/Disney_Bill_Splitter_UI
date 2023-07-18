@@ -1,5 +1,5 @@
 <script>
-import {Cart} from "../stores/stores"
+import {Cart, Add_Name,Add_Price,Add_Assigned_To,Add_Can_Discount} from "../stores/stores"
 export let item;
 function removeItem() {
 	const index = $Cart.findIndex((i) => {
@@ -8,6 +8,13 @@ function removeItem() {
 	$Cart.splice(index, 1);
 	$Cart = $Cart
 
+}
+function editItem() {
+	$Add_Name = item.name
+	$Add_Price = item.price
+	$Add_Assigned_To = item.assigned_to
+	$Add_Can_Discount = item.can_discount
+	removeItem()
 }
 </script>
 
@@ -29,9 +36,12 @@ function removeItem() {
   <div class="text-center">
     {item.assigned_to}
   </div>
-  <div class="text-center py-2">
+  <div class="text-center py-2 grid grid-cols-2">
       <button type="button" class="btn btn-sm variant-filled-error rounded" on:click={removeItem}>
       Delete
+      </button>
+      <button type="button" class="btn btn-sm variant-filled-tertiary rounded" on:click={editItem}>
+      Edit
       </button>
 
   </div>

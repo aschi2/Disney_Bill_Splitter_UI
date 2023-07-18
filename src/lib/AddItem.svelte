@@ -1,13 +1,17 @@
 <script lang="ts">
-  import { Cart, Payers, Discount } from "../stores/stores";
+  import {
+    Cart,
+    Payers,
+    Discount,
+    Add_Name,
+    Add_Price,
+    Add_Assigned_To,
+    Add_Can_Discount,
+  } from "../stores/stores";
   import { SlideToggle } from "@skeletonlabs/skeleton";
   import { toastStore } from "@skeletonlabs/skeleton";
   import type { ToastSettings } from "@skeletonlabs/skeleton";
 
-  let name = "";
-  let price = "";
-  let can_discount = true;
-  let assigned_to = [];
   const priceError: ToastSettings = {
     message: "Invalid Price!",
     background: "variant-filled-error",
@@ -35,37 +39,47 @@
     return Number(Math.floor(value + "e" + decimals) + "e-" + decimals);
   }
 
+function addZeroes(num) {
+  const dec = String(num).split('.')[1]
+  const len = dec && dec.length > 2 ? dec.length : 2
+  return Number(num).toFixed(len)
+}
+
   function addItem() {
-    if (isInt(price)) {
-      price = price + ".00";
-    }
-    if (!isValidNumber(price)) {
+    // if (isInt($Add_Price)) {
+    //   $Add_Price = $Add_Price + ".00";
+    // }
+    $Add_Price = String(addZeroes($Add_Price));
+    if (!isValidNumber($Add_Price)) {
       toastStore.trigger(priceError);
       return;
     }
-    if (assigned_to.length == 0) {
+    if ($Add_Assigned_To.length == 0) {
       toastStore.trigger(assigned_toError);
       return;
     }
-    let num_price = parseFloat(price);
+    let num_price = parseFloat($Add_Price);
+    console.log("HERE");
+    console.log($Add_Price);
+    console.log(num_price);
     let discounted_price = num_price;
     let id = uuidv4();
-    if (can_discount) {
+    if ($Add_Can_Discount) {
       discounted_price = num_price - num_price * ($Discount / 100);
-      discounted_price = floorDecimals(discounted_price, 2)
+      discounted_price = floorDecimals(discounted_price, 2);
     }
     $Cart.push({
-      name: name,
+      name: $Add_Name,
       price: num_price,
-      can_discount: can_discount,
-      assigned_to: assigned_to,
+      can_discount: $Add_Can_Discount,
+      assigned_to: $Add_Assigned_To,
       id: id,
       discounted_price: discounted_price,
       discount: $Discount,
     });
     $Cart = $Cart;
-    name = "";
-    price = "";
+    $Add_Name = "";
+    $Add_Price = "";
   }
 </script>
 
@@ -75,7 +89,7 @@
       <input
         class="input variant-form-material"
         type="text"
-        bind:value={name}
+        bind:value={$Add_Name}
         placeholder="Item Name"
       />
     </div>
@@ -84,7 +98,7 @@
         class="input variant-form-material"
         type="text"
         inputmode="decimal"
-        bind:value={price}
+        bind:value={$Add_Price}
         placeholder="Item Price"
       />
     </div>
@@ -101,13 +115,13 @@
         name="slider-label"
         size="sm"
         active="bg-success-500"
-        bind:checked={can_discount}>Discountable</SlideToggle
+        bind:checked={$Add_Can_Discount}>Discountable</SlideToggle
       >
     </div>
   </div>
   <div>
     <label>Select Payers</label>
-    <select class="select" name="payers" multiple bind:value={assigned_to}>
+    <select class="select" name="payers" multiple bind:value={$Add_Assigned_To}>
       {#each $Payers as payer}
         <option value={payer}>{payer}</option>
       {/each}

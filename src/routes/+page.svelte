@@ -6,8 +6,7 @@
   import AddItem from "../lib/AddItem.svelte";
   import Split from "../lib/Split.svelte";
   import { Toast } from "@skeletonlabs/skeleton";
-  $: total = Number($Tax) + Number($Tip) + Number(subtotal);
-  $: subtotal = Number($Subtotal);
+  $: total = Number($Tax) + Number($Tip) + Number($Subtotal);
   function reset() {
     $Cart = [];
     $Tax = 0;
@@ -77,7 +76,7 @@
             <div class="grid grid-cols-1 text-center">
               <div>Subtotal</div>
               <div>
-                ${subtotal.toFixed(2)}
+                ${Number($Subtotal).toFixed(2)}
               </div>
             </div>
             <div class="grid grid-cols-1 items-center gap-x-4 text-center">
