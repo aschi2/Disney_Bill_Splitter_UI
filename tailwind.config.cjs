@@ -11,4 +11,5 @@ module.exports = {
 		extend: {},
 	},
 	plugins: [forms,typography,...skeleton()],
+	safelist: ['variant-soft-error','variant-filled']
 }

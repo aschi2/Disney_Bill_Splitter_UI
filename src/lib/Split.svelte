@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Cart, Payers, Tax, Tip, Subtotal } from "../stores/stores";
   function payerBill(payer, cart, tip, tax) {
-    let payer_cart = { name: payer, items: [] };
+    let payer_cart = { name: payer, items: <any[]>[],share:  0.0, tax: 0.0, tip: 0.0 };
     let share = 0.0;
     for (let i = 0; i < $Cart.length; i++) {
       let item = cart[i];
@@ -33,7 +33,8 @@
     <div class="grid grid-cols-1 p-2 card">
       <span class="text-sm">{payer}</span>
       {#each payer_carts[payer].items as item}
-          <div class="text-xs text-slate-400">1/{item.share_payers} {item.name} ${item.share_price.toFixed(2)}  </div>
+          <div class="text-xs text-slate-400">1/{item.share_payers} {item.name} ${(item.share_price.toFixed(3).charAt(item.share_price.toFixed(2).length) != '0') ? item.share_price.toFixed(3) : item.share_price.toFixed(2)} </div>
+          <div class="text-xs text-slate-400">1/{item.share_payers} {item.name} ${item.share_price.toFixed(2)} </div>
       {/each}
           <div class="text-xs text-slate-400">Tip Share: ${payer_carts[payer].tip}  </div>
           <div class="text-xs text-slate-400">Tax Share: ${payer_carts[payer].tax}  </div>

@@ -59,9 +59,6 @@
       return;
     }
     let num_price = parseFloat($Add_Price);
-    console.log("HERE");
-    console.log($Add_Price);
-    console.log(num_price);
     let discounted_price = num_price;
     let id = uuidv4();
     if ($Add_Can_Discount) {
@@ -81,10 +78,29 @@
     $Add_Name = "";
     $Add_Price = "";
   }
+  function togglePayer(payer){
+		console.log("toggling")
+		console.log(payer)
+		console.log($Add_Assigned_To)
+		if ($Add_Assigned_To.includes(payer)){
+			$Add_Assigned_To = $Add_Assigned_To.filter((item) => item !== payer);
+		} else {
+			$Add_Assigned_To.push(payer);
+		}
+		$Add_Assigned_To = $Add_Assigned_To;
+	}
+function toggleDiscount(){
+		if ($Add_Can_Discount){
+			$Add_Can_Discount = false;
+		} else {
+			$Add_Can_Discount = true;
+		}
+		$Add_Can_Discount = $Add_Can_Discount;
+	}
 </script>
 
 <div class="grid grid-cols-1 items-center gap-4">
-  <div class="grid grid-cols-2 items-center gap-x-2 text-center">
+  <div class="grid grid-cols-2 items-center gap-2 text-center">
     <div>
       <input
         class="input variant-form-material"
@@ -125,22 +141,38 @@
       >
     </div>
 
-    <div>
-      <SlideToggle
-        name="slider-label"
-        size="sm"
-        active="bg-success-500"
-        bind:checked={$Add_Can_Discount}>Discountable</SlideToggle
-      >
+    <div class="flex flex-row card h-full items-center {$Add_Can_Discount ? 'variant-ghost-success' : 'variant-ghost-error'}" on:click={() => toggleDiscount()}>
+      <!-- <SlideToggle -->
+      <!--   name="slider-label" -->
+      <!--   size="sm" -->
+      <!--   active="bg-success-500" -->
+      <!--   bind:checked={$Add_Can_Discount}>Discountable</SlideToggle -->
+      <!-- > -->
+      <div class="text-center w-full ">
+      {#if $Add_Can_Discount}
+      Discount
+      {:else}
+      No Discount
+      {/if}
+      </div>
     </div>
   </div>
   <div>
     <label>Select Payers</label>
-    <select class="select" name="payers" multiple bind:value={$Add_Assigned_To}>
+    <!-- <select class="select" name="payers" multiple bind:value={$Add_Assigned_To}> -->
+    <!--   {#each $Payers as payer} -->
+    <!--     <option value={payer}>{payer}</option> -->
+    <!--   {/each} -->
+    <!-- </select> -->
+      <div class="grid grid-cols-3 grid-flow gap-4 text-center w-full">
+
       {#each $Payers as payer}
-        <option value={payer}>{payer}</option>
+	<div class="p-2 card truncate {$Add_Assigned_To.includes(payer) ? 'variant-ghost-success' : 'variant-ghost-error'}" on:click={() => togglePayer(payer)}>
+        <span class="text-sm">{payer}</span>
+
+	</div>
       {/each}
-    </select>
+	</div>
   </div>
   <div class="text-center">
     <button
