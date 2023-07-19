@@ -36,11 +36,11 @@ function editItem() {
   <div class="text-center">
     {item.assigned_to}
   </div>
-  <div class="text-center py-2 grid grid-cols-2">
-      <button type="button" class="btn btn-sm variant-filled-error rounded" on:click={removeItem}>
+  <div class="text-center grid grid-cols-2 h-full">
+      <button type="button" class="btn btn-sm variant-filled-error rounded-none rounded-bl" on:click={removeItem}>
       Delete
       </button>
-      <button type="button" class="btn btn-sm variant-filled-tertiary rounded" on:click={editItem}>
+      <button type="button" class="btn btn-sm variant-filled-tertiary rounded-none rounded-br" on:click={editItem}>
       Edit
       </button>
 
