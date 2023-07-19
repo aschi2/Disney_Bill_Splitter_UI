@@ -1,6 +1,12 @@
 <script>
 import { Subtotal, Tax, Tip, Subtotal_Full } from "../stores/stores"
 $: total = Number($Tax) + Number($Tip) + Number($Subtotal);
+function forceTwoDecimalsTax() {
+	$Tax  = parseFloat($Tax.toFixed(2));
+}
+function forceTwoDecimalsTip() {
+	$Tip = parseFloat($Tip.toFixed(2));
+}
 
 </script>
 
@@ -16,8 +22,10 @@ $: total = Number($Tax) + Number($Tip) + Number($Subtotal);
       <div>Tax</div>
       <input
         class="input variant-form-material"
-        type="text"
+        type="number"
+	step=".01"
         inputmode="decimal"
+	on:change={forceTwoDecimalsTax}
         bind:value={$Tax}
         placeholder="Item Price"
       />
@@ -27,8 +35,10 @@ $: total = Number($Tax) + Number($Tip) + Number($Subtotal);
 
       <input
         class="input variant-form-material"
-        type="text"
+        type="number"
+	setp=".01"
         inputmode="decimal"
+	on:change={forceTwoDecimalsTip}
         bind:value={$Tip}
         placeholder="Tip"
       />

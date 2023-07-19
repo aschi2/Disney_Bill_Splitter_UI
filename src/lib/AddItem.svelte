@@ -54,6 +54,7 @@
       toastStore.trigger(priceError);
       return;
     }
+    $Add_Price = parseFloat($Add_Price).toFixed(2);
     if ($Add_Assigned_To.length == 0) {
       toastStore.trigger(assigned_toError);
       return;
