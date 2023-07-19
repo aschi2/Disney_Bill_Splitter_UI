@@ -25,6 +25,7 @@
   <div class="flex w-full flex-row items-center justify-items-center input-group input-group-divider rounded">
       <input
         class="input variant-form-material"
+	on:keypress={e => {if (e.key === 'Enter') addPayer()}}
         type="text"
         bind:value={payer}
       />

@@ -39,11 +39,11 @@
     return Number(Math.floor(value + "e" + decimals) + "e-" + decimals);
   }
 
-function addZeroes(num) {
-  const dec = String(num).split('.')[1]
-  const len = dec && dec.length > 2 ? dec.length : 2
-  return Number(num).toFixed(len)
-}
+  function addZeroes(num) {
+    const dec = String(num).split(".")[1];
+    const len = dec && dec.length > 2 ? dec.length : 2;
+    return Number(num).toFixed(len);
+  }
 
   function addItem() {
     // if (isInt($Add_Price)) {
@@ -102,12 +102,27 @@ function addZeroes(num) {
         placeholder="Item Price"
       />
     </div>
-    <div class="flex flex-row items-center">
-      <input
-        class="input variant-form-material text-right"
-        type="number"
-        bind:value={$Discount}
-      /> %
+    <div class="flex flex-row">
+      <span
+        class="input variant-form-material flex w-full flex-row items-center"
+      >
+        {#if $Add_Can_Discount}
+          <input
+            class="w-full border-none bg-transparent text-right"
+            type="number"
+            bind:value={$Discount}
+          /> %
+        {:else}
+          <input
+            class="w-full border-none bg-transparent text-right text-opacity-50 disabled:text-slate-400"
+            type="number"
+            disabled
+            bind:value={$Discount}
+          />
+          <div class="text-slate-400">%</div>
+        {/if}
+        <span /></span
+      >
     </div>
 
     <div>

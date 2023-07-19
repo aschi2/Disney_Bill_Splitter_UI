@@ -1,17 +1,22 @@
 <script>
-  import { Cart, Tax, Tip, Subtotal, Subtotal_Full, Payers } from "../stores/stores";
+  import {
+    Cart,
+    Tax,
+    Tip,
+    Payers,
+  } from "../stores/stores";
   import Items from "../lib/Items.svelte";
   import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
   import AddPayer from "../lib/AddPayer.svelte";
   import AddItem from "../lib/AddItem.svelte";
   import Split from "../lib/Split.svelte";
+  import Summary from "../lib/Summary.svelte";
   import { Toast } from "@skeletonlabs/skeleton";
-  $: total = Number($Tax) + Number($Tip) + Number($Subtotal);
   function reset() {
     $Cart = [];
     $Tax = 0;
     $Tip = 0;
-    $Payers = []
+    $Payers = [];
   }
 </script>
 
@@ -52,76 +57,40 @@
           </div>
         </svelte:fragment>
       </AccordionItem>
-    </Accordion>
-  </div>
-
-  <Accordion>
-    <AccordionItem open>
-      <svelte:fragment slot="summary">Cart</svelte:fragment>
-      <svelte:fragment slot="content">
-        <div class="grid auto-cols-max grid-cols-1 place-items-center gap-4">
-          {#each $Cart as item}
-            <div class="w-5/6">
-              <Items bind:item />
-            </div>
-          {/each}
-        </div>
-      </svelte:fragment>
-    </AccordionItem>
-    <AccordionItem open>
-      <svelte:fragment slot="summary">Summary</svelte:fragment>
-      <svelte:fragment slot="content">
-        <div class="grid grid-cols-1 place-items-center gap-4">
-          <div class="grid grid-cols-1 items-center gap-x-4 text-center">
-            <div class="grid grid-cols-1 text-center">
-              <div>Subtotal</div>
-              <div>
-                ${Number($Subtotal).toFixed(2)}
+      <AccordionItem open>
+        <svelte:fragment slot="summary">Cart</svelte:fragment>
+        <svelte:fragment slot="content">
+          <div class="grid auto-cols-max grid-cols-1 place-items-center gap-4">
+            {#each $Cart as item}
+              <div class="w-5/6">
+                <Items bind:item />
               </div>
-            </div>
-            <div class="grid grid-cols-1 items-center gap-x-4 text-center">
-              <div>Tax</div>
-              <input
-                class="input variant-form-material"
-                type="text"
-                inputmode="decimal"
-                bind:value={$Tax}
-                placeholder="Item Price"
-              />
-            </div>
-            <div class="grid grid-cols-1 items-center gap-x-4 text-center">
-              <div>Tip</div>
-
-              <input
-                class="input variant-form-material"
-                type="text"
-                inputmode="decimal"
-                bind:value={$Tip}
-                placeholder="Tip"
-              />
-              {$Subtotal > 0
-                ? (($Tip / $Subtotal_Full) * 100).toFixed(2)
-                : "0.00"}%
-            </div>
-            <div>
-              Total: ${total.toFixed(2)}
-            </div>
+            {/each}
           </div>
-        </div></svelte:fragment
+        </svelte:fragment>
+      </AccordionItem>
+      <AccordionItem open>
+        <svelte:fragment slot="summary">Summary</svelte:fragment>
+        <svelte:fragment slot="content">
+          <Summary />
+        </svelte:fragment>
+      </AccordionItem>
+      <AccordionItem open>
+        <svelte:fragment slot="summary">Split</svelte:fragment>
+        <svelte:fragment slot="content">
+          <Split />
+        </svelte:fragment>
+      </AccordionItem>
+    </Accordion>
+    <div class="text-center">
+      <button
+        type="button"
+        class="btn variant-filled-error rounded"
+        on:click={reset}
       >
-    </AccordionItem>
-    <AccordionItem open>
-      <svelte:fragment slot="summary">Split</svelte:fragment>
-      <svelte:fragment slot="content">
-        <Split />
-      </svelte:fragment>
-    </AccordionItem>
-  </Accordion>
-  <div class = "text-center">
-    <button type="button" class="btn variant-filled-error rounded" on:click={reset}>
-      Reset
-    </button>
-  </div>
-  <div class="h-10">
+        Reset
+      </button>
+    </div>
+    <div class="h-10" />
   </div>
 </div>
