@@ -20,6 +20,10 @@
     message: "No One Assigned!",
     background: "variant-filled-error",
   };
+  const nameError: ToastSettings = {
+    message: "Item Name Can't Be Empty!",
+    background: "variant-filled-error",
+  };
   function isValidNumber(num) {
     return /\d+\.\d{2}/gm.test(String(num));
   }
@@ -50,13 +54,17 @@
     //   $Add_Price = $Add_Price + ".00";
     // }
     $Add_Price = String(addZeroes($Add_Price));
-    if (!isValidNumber($Add_Price)) {
+    if (!isValidNumber($Add_Price) || $Add_Price.length == 0 || $Add_Price == '0.00') {
       toastStore.trigger(priceError);
       return;
     }
     $Add_Price = parseFloat($Add_Price).toFixed(2);
     if ($Add_Assigned_To.length == 0) {
       toastStore.trigger(assigned_toError);
+      return;
+    }
+    if ($Add_Name.length == 0) {
+      toastStore.trigger(nameError);
       return;
     }
     let num_price = parseFloat($Add_Price);
