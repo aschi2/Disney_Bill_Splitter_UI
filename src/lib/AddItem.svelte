@@ -8,7 +8,6 @@
     Add_Assigned_To,
     Add_Can_Discount,
   } from "../stores/stores";
-  import { SlideToggle } from "@skeletonlabs/skeleton";
   import { toastStore } from "@skeletonlabs/skeleton";
   import type { ToastSettings } from "@skeletonlabs/skeleton";
 
@@ -150,7 +149,7 @@ function toggleDiscount(){
       >
     </div>
 
-    <div class="flex flex-row card h-full items-center {$Add_Can_Discount ? 'variant-ghost-success' : 'variant-ghost-error'}" on:click={() => toggleDiscount()}>
+    <div class="flex flex-row card h-full items-center {$Add_Can_Discount ? 'variant-ghost-success shadow-inner' : 'variant-ghost-error shadow-xl'}" on:click={() => toggleDiscount()}>
       <!-- <SlideToggle -->
       <!--   name="slider-label" -->
       <!--   size="sm" -->
@@ -167,7 +166,7 @@ function toggleDiscount(){
     </div>
   </div>
   <div>
-    <label>Select Payers</label>
+    <label class="pb-4">Select Payers</label>
     <!-- <select class="select" name="payers" multiple bind:value={$Add_Assigned_To}> -->
     <!--   {#each $Payers as payer} -->
     <!--     <option value={payer}>{payer}</option> -->
@@ -176,7 +175,7 @@ function toggleDiscount(){
       <div class="grid grid-cols-3 grid-flow gap-4 text-center w-full">
 
       {#each $Payers as payer}
-	<div class="p-2 card truncate {$Add_Assigned_To.includes(payer) ? 'variant-ghost-success' : 'variant-ghost-error'}" on:click={() => togglePayer(payer)}>
+	<div class="p-2 card truncate {$Add_Assigned_To.includes(payer) ? 'variant-ghost-success shadow-inner' : 'variant-ghost-error shadow-xl'}" on:click={() => togglePayer(payer)}>
         <span class="text-sm">{payer}</span>
 
 	</div>

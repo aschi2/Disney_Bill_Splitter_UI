@@ -28,12 +28,16 @@
     content="black-translucent"
   />
   <meta name="apple-mobile-web-app-title" content="Themepark Split" />
+  <meta
+      name="viewport"
+      content="initial-scale=1,user-scalable=no,viewport-fit=cover,width=device-width"
+    />
 </svelte:head>
 
 <Toast />
 <div class="place-items-center gap-8">
   <div class="w-full">
-    <h1 class="h1 py-2 text-center shadow-lg backdrop-brightness-125">
+    <h1 class="h3 pt-safe pb-2 text-center shadow-2xl sticky top-0 z-50 bg-surface-900">
       <span
         class="bg-gradient-to-br from-blue-500 to-cyan-300 box-decoration-clone bg-clip-text text-transparent"
         >Themepark Bill Splitter</span

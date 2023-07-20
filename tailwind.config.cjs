@@ -10,6 +10,6 @@ module.exports = {
 	theme: {
 		extend: {},
 	},
-	plugins: [forms,typography,...skeleton()],
+	plugins: [forms,typography,...skeleton(), require('tailwindcss-safe-area')],
 	safelist: ['variant-soft-error','variant-filled']
 }
