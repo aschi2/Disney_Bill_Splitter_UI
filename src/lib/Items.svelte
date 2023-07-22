@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
 import {Cart, Add_Name,Add_Price,Add_Assigned_To,Add_Can_Discount} from "../stores/stores"
-export let item;
+export let item: { name: string, price: string, discount: number, assigned_to: string[], can_discount: boolean, id: string };
 function removeItem() {
-	const index = $Cart.findIndex((i) => {
+	const index = $Cart.findIndex((i: any) => {
 			return i.id === item.id;
 		})
 	$Cart.splice(index, 1);
@@ -26,7 +26,7 @@ function editItem() {
 </div>
   <div class="grid grid-cols-2 divide-x ">
     <div class="w-full px-2 text-center">
-      ${item.price.toFixed(2)}
+      ${Number(item.price).toFixed(2)}
     </div>
     <div class="h-fit w-full px-2 text-center">
       {item.can_discount ? String(item.discount) + "% off" : "Not Discounted"}

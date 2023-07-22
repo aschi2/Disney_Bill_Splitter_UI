@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import { Subtotal, Tax, Tip, Subtotal_Full } from "../stores/stores"
 $: total = Number($Tax) + Number($Tip) + Number($Subtotal);
 function forceTwoDecimalsTax() {
@@ -36,7 +36,7 @@ function forceTwoDecimalsTip() {
       <input
         class="input variant-form-material"
         type="number"
-	setp=".01"
+	step=".01"
         inputmode="decimal"
 	on:change={forceTwoDecimalsTip}
         bind:value={$Tip}

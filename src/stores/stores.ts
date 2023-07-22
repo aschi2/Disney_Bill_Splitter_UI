@@ -1,7 +1,8 @@
 import { writable, derived } from "svelte/store";
+import type { Writable } from "svelte/store";
 
-export const Payers = writable([]);
-export const Cart = writable([]);
+export const Payers: Writable<string[]> = writable([]);
+export const Cart: Writable<any[]> = writable([]);
 
 // export const Cart = writable([
 //   {
@@ -39,5 +40,5 @@ export const Tax = writable(0.0);
 export const Tip = writable(0.0);
 export const Add_Name = writable("");
 export const Add_Price = writable("");
-export const Add_Assigned_To = writable([]);
+export const Add_Assigned_To: Writable<string[]> = writable([]);
 export const Add_Can_Discount = writable(true);

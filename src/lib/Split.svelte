@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Cart, Payers, Tax, Tip, Subtotal } from "../stores/stores";
-  function payerBill(payer, cart, tip, tax) {
+  function payerBill(payer: string, cart: any[], tip: number, tax: number) {
     let payer_cart = { name: payer, items: <any[]>[],share:  0.0, tax: 0.0, tip: 0.0 };
     let share = 0.0;
     for (let i = 0; i < $Cart.length; i++) {
@@ -15,8 +15,8 @@
       }
     }
     let share_ratio = Number($Subtotal) > 0 ? share / Number($Subtotal) : 0;
-    let share_tip = share_ratio * Number(tip);
-    let share_tax = share_ratio * Number(tax);
+    let share_tip = share_ratio * tip;
+    let share_tax = share_ratio * tax;
     share = share + share_tip + share_tax;
     payer_cart.share = share;
     payer_cart.tax = share_tax;
