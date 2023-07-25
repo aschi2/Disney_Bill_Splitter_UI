@@ -4,20 +4,6 @@ import type { Writable } from "svelte/store";
 export const Payers: Writable<string[]> = writable([]);
 export const Cart: Writable<any[]> = writable([]);
 
-// export const Cart = writable([
-//   {
-//     name: "al pastor porkchop",
-//     can_discount: false,
-//     price: 3.0,
-//     assigned_to: ["austin", "jeremy"],
-//   },
-//   {
-//     name: "lobster nachos",
-//     can_discount: true,
-//     price: 23.0,
-//     assigned_to: ["austin", "jeremy"],
-//   },
-// ]);
 
 export const Subtotal = derived(Cart, ($Cart) => {
   let subtotal = 0.0;

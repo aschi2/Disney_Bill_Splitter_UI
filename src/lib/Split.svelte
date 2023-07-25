@@ -36,8 +36,8 @@
           <div class="text-xs text-slate-400">1/{item.share_payers} {item.name} ${(item.share_price.toFixed(3).charAt(item.share_price.toFixed(2).length) != '0') ? item.share_price.toFixed(3) : item.share_price.toFixed(2)} </div>
           <!-- <div class="text-xs text-slate-400">1/{item.share_payers} {item.name} ${item.share_price.toFixed(2)} </div> -->
       {/each}
-          <div class="text-xs text-slate-400">Tip Share: ${payer_carts[payer].tip}  </div>
-          <div class="text-xs text-slate-400">Tax Share: ${payer_carts[payer].tax}  </div>
+          <div class="text-xs text-slate-400">Tip Share: ${(payer_carts[payer].tip.toFixed(3).charAt(payer_carts[payer].tip.toFixed(2).length) != '0') ? payer_carts[payer].tip.toFixed(3) : payer_carts[payer].tip.toFixed(2)}  </div>
+          <div class="text-xs text-slate-400">Tax Share: ${(payer_carts[payer].tax.toFixed(3).charAt(payer_carts[payer].tax.toFixed(2).length) != '0') ? payer_carts[payer].tax.toFixed(3) : payer_carts[payer].tax.toFixed(2)}  </div>
       <div>
         Total: ${payer_carts[payer].share.toFixed(2)}
       </div>

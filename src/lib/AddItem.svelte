@@ -87,6 +87,7 @@
       assigned_to: $Add_Assigned_To,
       id: id,
       discounted_price: discounted_price,
+      discount_value: num_price - discounted_price,
       discount: $Discount,
     });
     $Cart = $Cart;

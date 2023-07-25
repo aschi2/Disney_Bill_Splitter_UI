@@ -25,11 +25,25 @@ function editItem() {
     </div>
 </div>
   <div class="grid grid-cols-2 divide-x ">
-    <div class="w-full px-2 text-center">
+    <div class="w-full grid grid-cols-1 text-center">
+    <div class="w-full px-2 text-center {item.can_discount ? 'text-slate-400' : ''}">
       ${Number(item.price).toFixed(2)}
     </div>
+    {#if item.can_discount}
+    <div class="w-full px-2 text-center">
+      ${Number(item.discounted_price).toFixed(2)}
+    </div>
+    {/if}
+    </div>
+    <div class="w-full grid grid-cols-1 text-center">
     <div class="h-fit w-full px-2 text-center">
       {item.can_discount ? String(item.discount) + "% off" : "Not Discounted"}
+    </div>
+    {#if item.can_discount}
+    <div class="h-fit w-full px-2 text-center text-success-400">
+      ${item.discount_value.toFixed(2)}
+    </div>
+    {/if}
     </div>
   </div>
 
