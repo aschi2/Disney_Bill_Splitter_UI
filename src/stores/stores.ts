@@ -27,4 +27,4 @@ export const Tip = writable(0.0);
 export const Add_Name = writable("");
 export const Add_Price = writable("");
 export const Add_Assigned_To: Writable<string[]> = writable([]);
-export const Add_Can_Discount = writable(true);
+export const Add_Can_Discount = writable(false);

@@ -10,7 +10,8 @@
   } from "../stores/stores";
   import { toastStore } from "@skeletonlabs/skeleton";
   import type { ToastSettings } from "@skeletonlabs/skeleton";
-
+  import Checkbox from '~icons/carbon/checkbox'
+  import CheckboxChecked from '~icons/carbon/checkbox-checked'
   const priceError: ToastSettings = {
     message: "Invalid Price!",
     background: "variant-filled-error",
@@ -93,6 +94,7 @@
     $Cart = $Cart;
     $Add_Name = "";
     $Add_Price = "";
+    $Add_Assigned_To = [];
   }
   function togglePayer(payer: string) {
     console.log("toggling");
@@ -169,11 +171,12 @@
       <!--   active="bg-success-500" -->
       <!--   bind:checked={$Add_Can_Discount}>Discountable</SlideToggle -->
       <!-- > -->
-      <div class="w-full text-center">
+      <div class="w-full flex flex-row items-center text-center gap-x-2">
         {#if $Add_Can_Discount}
-          Discount
+          <div class=" pl-2 justify-start" ><CheckboxChecked /></div><div class="justify-center pr-6 flex flex-auto"> Discount</div>
         {:else}
-          No Discount
+
+          <div class=" pl-2 justify-start" ><Checkbox /></div><div class="justify-center pr-6 flex flex-auto"> No Discount</div>
         {/if}
       </div>
     </div>
@@ -188,12 +191,17 @@
     <div class="grid-flow grid w-full grid-cols-3 gap-4 text-center">
       {#each $Payers as payer}
         <div
-          class="card truncate p-2 {$Add_Assigned_To.includes(payer)
+          class="card truncate p-2 flex flex-row items-center {$Add_Assigned_To.includes(payer)
             ? 'variant-ghost-success shadow-inner'
             : 'variant-ghost-error shadow-xl'}"
           on:click={() => togglePayer(payer)}
         >
-          <span class="text-sm">{payer}</span>
+          <!-- <span class="text-sm">{payer}</span> -->
+	  {#if $Add_Assigned_To.includes(payer)}
+          <div class=" pl-2 justify-start" ><CheckboxChecked /></div><div class="justify-center pr-6 flex flex-auto"> {payer}</div>
+	  {:else}
+          <div class=" pl-2 justify-start" ><Checkbox /></div><div class="justify-center pr-6 flex flex-auto"> {payer}</div>
+	  {/if}
         </div>
       {/each}
     </div>
