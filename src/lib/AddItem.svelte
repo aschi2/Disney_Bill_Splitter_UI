@@ -10,8 +10,8 @@
   } from "../stores/stores";
   import { toastStore } from "@skeletonlabs/skeleton";
   import type { ToastSettings } from "@skeletonlabs/skeleton";
-  import Checkbox from '~icons/carbon/checkbox'
-  import CheckboxChecked from '~icons/carbon/checkbox-checked'
+  import Checkbox from "~icons/carbon/checkbox";
+  import CheckboxChecked from "~icons/carbon/checkbox-checked";
   const priceError: ToastSettings = {
     message: "Invalid Price!",
     background: "variant-filled-error",
@@ -159,7 +159,7 @@
       >
     </div>
 
-    <div
+    <button
       class="card flex h-full flex-row items-center {$Add_Can_Discount
         ? 'variant-ghost-success shadow-inner'
         : 'variant-ghost-error shadow-xl'}"
@@ -171,38 +171,55 @@
       <!--   active="bg-success-500" -->
       <!--   bind:checked={$Add_Can_Discount}>Discountable</SlideToggle -->
       <!-- > -->
-      <div class="w-full flex flex-row items-center text-center gap-x-2">
+      <div class="flex w-full flex-row items-center gap-x-2 text-center">
         {#if $Add_Can_Discount}
-          <div class=" pl-2 justify-start" ><CheckboxChecked /></div><div class="justify-center pr-6 flex flex-auto"> Discount</div>
+          <div class=" justify-start pl-2">
+            <CheckboxChecked />
+          </div>
+          <div class="flex flex-auto justify-center pr-6">Discount</div>
         {:else}
-
-          <div class=" pl-2 justify-start" ><Checkbox /></div><div class="justify-center pr-6 flex flex-auto"> No Discount</div>
+          <div class=" justify-start pl-2">
+            <Checkbox />
+          </div>
+          <div class="flex flex-auto justify-center pr-6">No Discount</div>
         {/if}
       </div>
-    </div>
+    </button>
   </div>
   <div>
-    <label class="pb-4">Select Payers</label>
+    <label for="payer-selection" class="pb-4">Select Payers</label>
     <!-- <select class="select" name="payers" multiple bind:value={$Add_Assigned_To}> -->
     <!--   {#each $Payers as payer} -->
     <!--     <option value={payer}>{payer}</option> -->
     <!--   {/each} -->
     <!-- </select> -->
-    <div class="grid-flow grid w-full grid-cols-3 gap-4 text-center">
+    <div id="payer-selection" class="grid-flow grid w-full grid-cols-3 gap-4 text-center">
       {#each $Payers as payer}
-        <div
-          class="card truncate p-2 flex flex-row items-center {$Add_Assigned_To.includes(payer)
-            ? 'variant-ghost-success shadow-inner'
+        <button
+          class="card flex flex-row items-center truncate p-2 {$Add_Assigned_To.includes(
+            payer
+          )
+            ? 'variant-ghost-success justify-center shadow-inner'
             : 'variant-ghost-error shadow-xl'}"
           on:click={() => togglePayer(payer)}
         >
-          <!-- <span class="text-sm">{payer}</span> -->
-	  {#if $Add_Assigned_To.includes(payer)}
-          <div class=" pl-2 justify-start" ><CheckboxChecked /></div><div class="justify-center pr-6 flex flex-auto"> {payer}</div>
-	  {:else}
-          <div class=" pl-2 justify-start" ><Checkbox /></div><div class="justify-center pr-6 flex flex-auto"> {payer}</div>
-	  {/if}
-        </div>
+          {#if $Add_Assigned_To.includes(payer)}
+            <!-- <span class="text-sm">{payer}</span> -->
+            <div class=" justify-start">
+              <CheckboxChecked />
+            </div>
+            <div class="flex flex-auto justify-center pr-5 text-sm">
+              {payer}
+            </div>
+          {:else}
+            <div class="justify-start">
+              <Checkbox />
+            </div>
+            <div class=" flex flex-auto justify-center pr-5 text-sm">
+              {payer}
+            </div>
+          {/if}
+        </button>
       {/each}
     </div>
   </div>
