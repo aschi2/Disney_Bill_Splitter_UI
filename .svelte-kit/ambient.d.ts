@@ -36,7 +36,6 @@ declare module '$env/static/private' {
 	export const SHELL: string;
 	export const SAVEHIST: string;
 	export const HISTSIZE: string;
-	export const npm_config_metrics_registry: string;
 	export const HOMEBREW_REPOSITORY: string;
 	export const TMPDIR: string;
 	export const npm_config_global_prefix: string;
@@ -157,7 +156,6 @@ declare module '$env/dynamic/private' {
 		SHELL: string;
 		SAVEHIST: string;
 		HISTSIZE: string;
-		npm_config_metrics_registry: string;
 		HOMEBREW_REPOSITORY: string;
 		TMPDIR: string;
 		npm_config_global_prefix: string;

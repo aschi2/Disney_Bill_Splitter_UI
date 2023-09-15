@@ -21,6 +21,14 @@ export const Subtotal_Full = derived(Cart, ($Cart) => {
   console.log(subtotal)
   return subtotal;
 });
+export const Discount_Full = derived(Cart, ($Cart) => {
+  let discount = 0.0;
+  $Cart.forEach((item) => {
+    discount += item.discount_value;
+  });
+  console.log(discount)
+  return discount;
+});
 export const Discount = writable(15);
 export const Tax = writable(0.0);
 export const Tip = writable(0.0);
