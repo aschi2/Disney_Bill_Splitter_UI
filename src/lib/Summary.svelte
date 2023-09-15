@@ -46,7 +46,7 @@ function tipPercent(percent: number) {
         bind:value={$Tax}
         placeholder="Item Price"
       />
-      {$Subtotal > 0 ? (($Tax / $Subtotal_Full) * 100).toFixed(2) : "0.00"}%
+      {$Subtotal > 0 ? (($Tax / $Subtotal) * 100).toFixed(2) : "0.00"}%
     </div>
     <div class="grid grid-cols-1 items-center gap-x-4 gap-y-1 text-center">
       <div class="font-bold">Tip</div>
