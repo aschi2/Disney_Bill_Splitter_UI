@@ -5,6 +5,8 @@
     Add_Price,
     Add_Assigned_To,
     Add_Can_Discount,
+    Single_Payer,
+    Payers,
   } from "../stores/stores";
   export let item: {
     name: string;
@@ -31,7 +33,11 @@
   function copyItem() {
     $Add_Name = item.name;
     $Add_Price = item.price;
+    if ($Single_Payer){
+	$Add_Assigned_To = [$Payers[0]];
+    }else{
     $Add_Assigned_To = [];
+    }
     $Add_Can_Discount = item.can_discount;
   }
 </script>
