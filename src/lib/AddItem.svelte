@@ -7,6 +7,7 @@
     Add_Price,
     Add_Assigned_To,
     Add_Can_Discount,
+    Single_Payer,
   } from "../stores/stores";
   import { toastStore } from "@skeletonlabs/skeleton";
   import type { ToastSettings } from "@skeletonlabs/skeleton";
@@ -66,6 +67,9 @@
       return;
     }
     $Add_Price = parseFloat($Add_Price).toFixed(2);
+    if ($Single_Payer) {
+      $Add_Assigned_To = [$Payers[0]];
+    }
     if ($Add_Assigned_To.length == 0) {
       toastStore.trigger(assigned_toError);
       return;
@@ -94,7 +98,11 @@
     $Cart = $Cart;
     $Add_Name = "";
     $Add_Price = "";
-    $Add_Assigned_To = [];
+    if ($Single_Payer) {
+      $Add_Assigned_To = [$Payers[0]];
+    } else {
+      $Add_Assigned_To = [];
+    }
   }
   function togglePayer(payer: string) {
     console.log("toggling");
@@ -114,6 +122,9 @@
       $Add_Can_Discount = true;
     }
     $Add_Can_Discount = $Add_Can_Discount;
+  }
+  $: if ($Single_Payer) {
+    togglePayer($Payers[0]);
   }
 </script>
 
@@ -193,7 +204,10 @@
     <!--     <option value={payer}>{payer}</option> -->
     <!--   {/each} -->
     <!-- </select> -->
-    <div id="payer-selection" class="grid-flow grid w-full grid-cols-3 gap-4 text-center">
+    <div
+      id="payer-selection"
+      class="grid-flow grid w-full grid-cols-3 gap-4 text-center"
+    >
       {#each $Payers as payer}
         <button
           class="card flex flex-row items-center truncate p-2 {$Add_Assigned_To.includes(

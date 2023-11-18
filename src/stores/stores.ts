@@ -1,7 +1,7 @@
 import { writable, derived } from "svelte/store";
 import type { Writable } from "svelte/store";
 
-export const Payers: Writable<string[]> = writable([]);
+export const Payers: Writable<string[]> = writable(["Myself"]);
 export const Cart: Writable<any[]> = writable([]);
 
 
@@ -36,3 +36,9 @@ export const Add_Name = writable("");
 export const Add_Price = writable("");
 export const Add_Assigned_To: Writable<string[]> = writable([]);
 export const Add_Can_Discount = writable(false);
+export const Single_Payer = derived(Payers, ($Payers) => {
+	if ($Payers.length == 1) {
+		return true;
+	}else{
+		return false;
+	}});

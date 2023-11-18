@@ -75,10 +75,10 @@
   <div class="grid h-full grid-cols-3 text-center">
     <button
       type="button"
-      class="btn btn-sm variant-filled-error rounded-none rounded-bl"
-      on:click={removeItem}
+      class="btn btn-sm variant-filled-primary rounded-none rounded-bl"
+      on:click={copyItem}
     >
-      Delete
+      Copy
     </button>
     <button
       type="button"
@@ -89,10 +89,10 @@
     </button>
     <button
       type="button"
-      class="btn btn-sm variant-filled-success rounded-none rounded-br"
-      on:click={copyItem}
+      class="btn btn-sm variant-filled-error rounded-none rounded-br"
+      on:click={removeItem}
     >
-      Copy
+      Delete
     </button>
   </div>
 </div>
